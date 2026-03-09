@@ -23,14 +23,35 @@ void drawStats(VirtualPet pet) {
   // statRow(label, value, rowIndex)
   // Add a new line here for each stat you add!
   int row = 0;
-  statRow("Energy",    pet.getEnergyLevel(),    row++);
-  statRow("Happiness", pet.getHappinessLevel(), row++);
-  // statRow("Weight",    pet.getWeight(),         row++);  // uncomment when getter added
-  // statRow("Age",       pet.getAgeYears(),        row++);  // uncomment when getter added
+  statRow("Energy",    pet.getEnergy(),    row++);
+  statRow("Happiness", pet.getHappiness(), row++);
+  statRow("Weight",    pet.getWeight(),    row++);
+  statRow("Age",       pet.getAge(),       row++);
 }
 
 // Draws one label + value row inside the stats panel
 void statRow(String label, int value, int rowIndex) {
+  float rowY = STATS_Y + 40 + rowIndex * ROW_HEIGHT;
+
+  // Label
+  fill(100, 80, 140);
+  noStroke();
+  textAlign(LEFT, TOP);
+  textSize(13);
+  text(label + ":", STATS_X + 12, rowY);
+
+  // Value
+  fill(50);
+  textAlign(RIGHT, TOP);
+  text(value, STATS_X + STATS_W - 12, rowY);
+
+  // Divider line
+  stroke(200, 190, 220);
+  strokeWeight(1);
+  line(STATS_X + 10, rowY + 20, STATS_X + STATS_W - 10, rowY + 20);
+}
+
+void statRow(String label, String value, int rowIndex) {
   float rowY = STATS_Y + 40 + rowIndex * ROW_HEIGHT;
 
   // Label
