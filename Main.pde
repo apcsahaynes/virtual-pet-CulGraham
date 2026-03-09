@@ -17,7 +17,7 @@ void setup() {
   size(600, 500);
   textFont(createFont("Arial", 16, true));
 
-  myPet = new VirtualPet4("Coco");
+  myPet = new VirtualPet("Pingle");
 
   // Buttons sit along the bottom of the screen
   // Button(label, x, y, width, height)
@@ -40,19 +40,39 @@ void draw() {
   feedButton.display();
   playButton.display();
   drawMessage();
+  
+  if (myPet.getWeight() >= 50) {
+    myPet.getFat();
+    background(0);
+    textSize(50);
+    textAlign(CENTER);
+    fill(150,0,0);
+    text("KILLED", width/2+3, height/2+3);
+    fill(255,0,0);
+    text("KILLED", width/2, height/2);
+  }
 }
 
 void mousePressed() {
   if (feedButton.isClicked(mouseX, mouseY)) {
     Food f = new Food("Watermelon", 3, 2, 2);
-    myPet.feed(f);
-    showMessage(f.getName() + " eaten!");
+    if (myPet.getEnergy() < 10) {  
+      myPet.feed(f);
+      showMessage(f.getName() + " eaten!");
+    } else {
+      showMessage("Your pet is full!");
+    }
+    myPet.bound();
   }
 
   if (playButton.isClicked(mouseX, mouseY)) {
-    Game g = new Game("Coin Toss", 2, 1);
-    myPet.play(g);
-    showMessage(g.getName() + " played!");
+    Game g = new Game("Coin Toss", 2, 1, 1);
+    if (myPet.getEnergy() > g.getEnergy()) {
+      myPet.play(g);
+      showMessage(g.getName() + " played!");
+    } else {
+      showMessage("Your pet is too tired!");
+    }
   }
 }
 
