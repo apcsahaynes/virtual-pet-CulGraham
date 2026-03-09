@@ -61,31 +61,84 @@ void drawPetGraphic() {
   // Body
   fill(170, 210, 255);
   noStroke();
-  ellipse(210, 220, 140, 120);
+  ellipse(210, 220, 8*(myPet.getWeight()), 120);
 
   // Head
   fill(170, 210, 255);
   ellipse(210, 145, 100, 90);
 
   // Eyes
-  fill(50);
+  if (myPet.getHappiness() < 10) {
+    fill(50);
+  ellipse(190, 138, 20, 20);
+  ellipse(230, 138, 20, 20);
+  } 
+  else if (myPet.getHappiness() >= 50) {
+  noFill();
+    stroke(80);
+    strokeWeight(2);
+    arc(190, 138, 24, 14, PI, TAU);
+    arc(230, 138, 24, 14, PI, TAU);
+  } 
+  else if (myPet.getHappiness() >= 20) {
+    fill(50);
+  ellipse(190, 138, 18, 18);
+  ellipse(230, 138, 18, 18);
+  } 
+  else {
+    fill(50);
   ellipse(190, 138, 14, 14);
   ellipse(230, 138, 14, 14);
+  }
 
   // Eye shine
+  if (myPet.getHappiness() < 10) {
+    fill(255);
+  ellipse(195, 134, 7, 7);
+  ellipse(235, 134, 7, 7);
+  ellipse(185, 144, 7, 7);
+  ellipse(225, 144, 7, 7);
+  } 
+  else if (myPet.getHappiness() >= 50) {
   fill(255);
+  ellipse(200000, 134, 7, 7);
+  ellipse(200000, 134, 7, 7);
+  ellipse(200000, 144, 7, 7);
+  ellipse(200000, 144, 7, 7);
+  } 
+  else if (myPet.getHappiness() >= 20) {
+    fill(255);
   ellipse(195, 134, 5, 5);
   ellipse(235, 134, 5, 5);
+  }
+  else {
+    fill(255);
+  ellipse(195, 134, 5, 5);
+  ellipse(235, 134, 5, 5);
+  }
 
   // Nose
+  noStroke();
   fill(255, 160, 180);
   ellipse(210, 152, 10, 7);
 
   // Mouth
-  noFill();
-  stroke(80);
-  strokeWeight(2);
-  arc(210, 160, 24, 14, 0, PI);
+  if (myPet.getHappiness() >= 20 ) {
+    noFill();
+    stroke(80);
+    strokeWeight(2);
+    arc(210, 160, 24, 14, 0, PI);
+  } else if (myPet.getHappiness() >= 10) {
+    noFill();
+    stroke(80);
+    strokeWeight(2);
+    line(230, 160, 190, 160);
+  } else {
+    noFill();
+    stroke(80);
+    strokeWeight(2);
+    arc(210, 160, 24, 14, PI, TAU);
+  }
 
   // Ears
   fill(170, 210, 255);
